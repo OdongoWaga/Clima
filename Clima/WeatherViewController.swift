@@ -52,6 +52,16 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //Write the getWeatherData method here:
     func getWeatherData(url: String, parameters: [String: String]) {
         
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON{
+            response in
+            if response.result.isSuccess{
+                print("Success! Got the data")
+            } else {
+                print("Error \(response.result.error)" )
+                self.cityLabel.text = "Connection Issues"
+            }
+        }
+        
     }
 
     
